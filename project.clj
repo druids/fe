@@ -4,6 +4,8 @@
   :license {:name "MIT License"
             :url "http://opensource.org/licenses/MIT"}
 
+  :test-paths ["test/cljs" "test/cljc"]
+
   :cloverage
   {:fail-threshold 90}
 
