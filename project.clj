@@ -15,7 +15,25 @@
                 :source-paths ["src" "test/cljs" "test/cljc"]
                 :compiler {:output-to "target/public/js/compiled/testable.js"
                            :main fe.test-runner
-                           :optimizations :none}}]}
+                           :optimizations :none}}
+               {:id "min"
+                :source-paths ["src"]
+                :jar true
+                :compiler {:main fe.core
+                           :output-to "target/public/js/compiled/fe.js"
+                           :output-dir "target"
+                           :source-map-timestamp true
+                           :optimizations :advanced
+                           :closure-defines {goog.DEBUG false}
+                           :parallel-build true
+                           :pretty-print false}
+                :warning-handlers
+                [(fn [warning-type env extra]
+                    (when (warning-type cljs.analyzer/*cljs-warnings*)
+                      (when-let [s (cljs.analyzer/error-message warning-type extra)]
+                        (binding [*out* *err*]
+                          (println "WARNING:" (cljs.analyzer/message env s)))
+                        (System/exit 1))))]}]}
 
   :doo {:build "test"}
 
