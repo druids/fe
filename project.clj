@@ -1,4 +1,4 @@
-(defproject fe "0.0.0"
+(defproject fe "0.1.0"
   :description "A money formatter"
   :url "https://github.com/druids/fe"
   :license {:name "MIT License"
