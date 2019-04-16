@@ -19,6 +19,17 @@ Leiningen/Boot
 Documentation
 -------------
 
+```clojure
+(require '[fe.core :as fe])
+
+(fe/fmt 10000 "EUR") ;; "10 000.00 EUR"
+(fe/fmt 10000 "EUR" {:decimal-pos 0}) ;; "10 000 EUR"
+(fe/fmt 10000 "EUR" {:part-sep ","}) ;; "10,000.00 EUR"
+(fe/fmt 10000 "EUR" {:decimal-sep ","}) ;; "10 000,00 EUR"
+(fe/fmt 10000 "£" {:currency-pos :prefix, :part-sep ","}) ;; "£10,000.00"
+```
+
+`fmt` function uses a non-breakable space by default (as Unicode character).
 
 Contribution
 ------------
