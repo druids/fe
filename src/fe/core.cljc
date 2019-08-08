@@ -14,6 +14,10 @@
        (map #(string/join (reverse %)))
        (string/join part-sep)))
 
+(def ^:private coerce
+  #?(:clj bigdec)
+  #?(:cljs double))
+
 (defn fmt
   "Formats a given `amount` as a `currency`.
    Options:
@@ -32,7 +36,7 @@
                             part-sep space}
                        :as opts}]]
   (let [[num-part decimal-part] (-> (str "%." decimal-num "f")
-                                    (format (float amount))
+                                    (format (coerce amount))
                                     (string/split #"\."))]
     (string/join ""
                  (concat (when (= :prefix currency-pos)
